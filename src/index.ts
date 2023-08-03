@@ -4,6 +4,8 @@ import { API_HASH, API_ID, SESSION, USER, CHAT } from "./secrets";
 import readline from 'readline';
 import { NewMessage } from "telegram/events";
 
+const DEBUG = process.env.DEBUG;
+
 function text(prompt: string): Promise<string> {
   return new Promise((resolve) => {
     const rl = readline.createInterface({
@@ -33,6 +35,9 @@ const main = async () => {
   console.log("SESSION:", client.session.save());
   client.addEventHandler((update) => {
     // console.log(update);
+    if (DEBUG && +(update.message?.fromId as any)?.userId === USER) {
+      console.log('DEBUG', update.message.id, update.message.fromId, update.message);
+    }
     if (
       +(update.message?.fromId as any)?.userId === USER &&
       +(update.message?.peerId as any)?.chatId === Math.abs(CHAT)
