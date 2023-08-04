@@ -40,7 +40,10 @@ const main = async () => {
     }
     if (
       +(update.message?.fromId as any)?.userId === USER &&
-      +(update.message?.peerId as any)?.chatId === Math.abs(CHAT)
+      (
+        +(update.message?.peerId as any)?.chatId === Math.abs(CHAT) ||
+        +(update.message?.peerId as any)?.channelId === Math.abs(CHAT)
+      )
     ) {
       // console.log(update.message.id, update.message.fromId, update.message);
       const emojis = update.message?.message
