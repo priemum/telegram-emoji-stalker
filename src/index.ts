@@ -35,8 +35,8 @@ const main = async () => {
   console.log("SESSION:", client.session.save());
   client.addEventHandler((update) => {
     // console.log(update);
-    if (DEBUG && +(update.message?.fromId as any)?.userId === USER) {
-      console.log('DEBUG', update.message.id, update.message.fromId, update.message);
+    if (DEBUG) {
+      console.log('DEBUG', update.message.id, update.message.fromId, (update.message?.peerId as any)?.chatId, (update.message?.peerId as any)?.channelId, update.message?.text?.substring(0, 20));
     }
     if (
       +(update.message?.fromId as any)?.userId === USER &&
