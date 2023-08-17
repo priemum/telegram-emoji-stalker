@@ -35,8 +35,10 @@ const main = async () => {
   console.log("SESSION:", client.session.save());
   client.addEventHandler((update) => {
     // console.log(update);
-    if (DEBUG) {
-      console.log('DEBUG', update.message.id, +(update.message.fromId as any)?.userId, +(update.message?.peerId as any)?.chatId, +(update.message?.peerId as any)?.channelId, update.message?.text?.substring(0, 20));
+    if (DEBUG && +(update.message?.peerId as any)?.channelId === Math.abs(CHAT)) {
+      console.log(update.message);
+      
+      // console.log('DEBUG', update.message.id, +(update.message.fromId as any)?.userId, +(update.message?.peerId as any)?.chatId, +(update.message?.peerId as any)?.channelId, update.message?.text?.substring(0, 20));
     }
     if (
       +(update.message?.fromId as any)?.userId === USER &&
