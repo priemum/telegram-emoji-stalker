@@ -40,12 +40,15 @@ const main = async () => {
       
       // console.log('DEBUG', update.message.id, +(update.message.fromId as any)?.userId, +(update.message?.peerId as any)?.chatId, +(update.message?.peerId as any)?.channelId, update.message?.text?.substring(0, 20));
     }
+    const channelFit = +(update.message?.peerId as any)?.channelId === Math.abs(CHAT) && update.message?.fromId === null;
+    const userFit = +(update.message?.fromId as any)?.userId === USER && (
+      +(update.message?.peerId as any)?.chatId === Math.abs(CHAT) ||
+      +(update.message?.peerId as any)?.channelId === Math.abs(CHAT)
+    );
     if (
-      +(update.message?.fromId as any)?.userId === USER &&
-      (
-        +(update.message?.peerId as any)?.chatId === Math.abs(CHAT) ||
-        +(update.message?.peerId as any)?.channelId === Math.abs(CHAT)
-      )
+      (USER === 0 && channelFit)
+      ||
+      (USER !== 0 && userFit)
     ) {
       // console.log(update.message.id, update.message.fromId, update.message);
       const emojis = update.message?.message
