@@ -9,7 +9,7 @@ const DEBUG = process.env.DEBUG;
 function text(prompt: string): Promise<string> {
   return new Promise((resolve) => {
     const rl = readline.createInterface({
-      input: process.stdin,
+      input: process.stdin,       
       output: process.stdout
     });
 
